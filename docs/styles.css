@@ -1,0 +1,10 @@
+:root{color-scheme:dark;font:15px/1.45 system-ui,sans-serif;background:#192019;color:#eee8da}
+*{box-sizing:border-box}body{margin:0}main{padding:18px;max-width:620px;margin:auto}
+h1{font:normal 27px Georgia,serif;margin:6px 0;color:#f8eedb}.eyebrow{font-size:11px;letter-spacing:.15em;color:#d3b27b}p{margin:9px 0 12px}
+h2{font:normal 21px Georgia,serif;color:#f8eedb;margin:0 0 12px}
+.card{margin:16px 0;padding:15px;border:1px solid #52624d;background:#283429;border-radius:10px}
+.notice{padding:11px 12px;background:#4c332e;border-left:3px solid #d3b27b;border-radius:4px}
+textarea{font:inherit;min-height:82px;width:100%;padding:9px;color:#f9f2e8;background:#18231d;border:1px solid #829580;border-radius:6px}
+label{display:block;margin-bottom:7px}.controls{display:flex;gap:8px;flex-wrap:wrap}
+button{font:600 13px system-ui,sans-serif;padding:10px 12px;border:0;border-radius:6px;background:#d3b27b;color:#1b211b;cursor:pointer}button.secondary{background:#415242;color:#f4eee1;border:1px solid #99a899}
+button:focus-visible,textarea:focus-visible{outline:3px solid #f5d29d}#noteStatus,#storageStatus,#handshake{overflow-wrap:anywhere}footer{color:#b7c4b6;font-size:12px;margin-top:20px}
