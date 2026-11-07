@@ -1,0 +1,59 @@
+(function () {
+  'use strict';
+  const protocol = 'reading-room-iframe-poc-v1';
+  const origin = 'https://thatgirlfeels-1.github.io';
+  const url = origin + '/Instagram-campaign-public/';
+  const id = 'reading-room-frame-poc';
+  const prior = document.getElementById(id);
+  if (prior) { prior.remove(); return; }
+  if (!['instagram.com','www.instagram.com'].includes(location.hostname)) {
+    alert('Open Instagram before running this test bookmarklet.'); return;
+  }
+  const nonce = Array.from(crypto.getRandomValues(new Uint8Array(16)), n => n.toString(16).padStart(2,'0')).join('');
+  const host = document.createElement('div');
+  host.id = id;
+  const shadow = host.attachShadow({mode: 'closed'});
+  const style = document.createElement('style');
+  style.textContent = ':host{all:initial}.panel{position:fixed!important;z-index:2147483647!important;right:12px!important;top:12px!important;width:min(460px,calc(100vw - 24px))!important;height:min(720px,calc(100vh - 24px))!important;background:#192019!important;color:#f7f0de!important;border:2px solid #d3b27b!important;border-radius:12px!important;padding:10px!important;box-shadow:0 15px 50px #0009!important;box-sizing:border-box!important;font:13px system-ui!important}.bar{height:46px;display:flex;justify-content:space-between;gap:10px;align-items:center}.bar strong{font:20px Georgia,serif}.bar button{border:1px solid #d3b27b;border-radius:6px;padding:8px;color:#f7f0de;background:#3e4b3e;cursor:pointer}.status{font-size:12px;height:27px;overflow:hidden;text-overflow:ellipsis}iframe{width:100%;height:calc(100% - 80px);border:0;background:#283429}';
+  const panel = document.createElement('section');
+  panel.className = 'panel';
+  panel.setAttribute('aria-label','Reading Room secure iframe test');
+  const bar = document.createElement('div');
+  bar.className='bar';
+  const name = document.createElement('strong');
+  name.textContent='Reading Room · Frame test';
+  const close = document.createElement('button');
+  close.textContent='Close';
+  close.addEventListener('click',()=>{window.removeEventListener('message',onMessage);host.remove();});
+  const status = document.createElement('div');
+  status.className='status';
+  status.setAttribute('role','status');
+  status.textContent='Loading Pages iframe (public test code only)…';
+  const frame = document.createElement('iframe');
+  frame.title='Reading Room synthetic data frame';
+  frame.setAttribute('sandbox','allow-scripts allow-same-origin');
+  frame.referrerPolicy='no-referrer';
+  frame.src=url;
+  const onMessage=(event)=>{
+    if(event.source!==frame.contentWindow||event.origin!==origin)return;
+    const d=event.data;
+    if(d?.protocol!==protocol||d?.type!=='ready'||d?.challenge!==nonce)return;
+    status.textContent=d.capabilities?.localSyntheticStorage
+      ?'Frame loaded; cross-origin handshake + storage succeeded.'
+      :'Frame loaded; storage may be restricted in this browser.';
+  };
+  window.addEventListener('message',onMessage);
+  frame.addEventListener('load',()=>{
+    frame.contentWindow?.postMessage({protocol,type:'hello',challenge:nonce},origin);
+  });
+  frame.addEventListener('error',()=>{status.textContent='Iframe failed to load (check browser console / CSP).';});
+  bar.append(name,close);
+  panel.append(bar,status,frame);
+  shadow.append(style,panel);
+  document.documentElement.append(host);
+  setTimeout(()=>{
+    if(host.isConnected&&status.textContent.startsWith('Loading')){
+      status.textContent='No frame reply. Pages may not be deployed or Instagram may block external frames.';
+    }
+  },8000);
+})();
