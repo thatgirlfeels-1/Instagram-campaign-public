@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Reading Room — cross-origin iframe compatibility test</title>
+<link rel="stylesheet" href="./styles.css">
+<script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">THE READING ROOM / MILESTONE ZERO</div>
+    <h1>Secure-frame compatibility test</h1>
+    <p>No account connection. Invented data only.</p>
+  </header>
+  <section class="notice"><strong>Security experiment:</strong> Never enter real notes, passwords, GitHub tokens or Instagram details. This public test page is not a completed private workspace.</section>
+  <section class="card">
+    <h2>Frame diagnostics</h2>
+    <p><strong>Context:</strong> <span id="context">Checking…</span></p>
+    <p><strong>Message handshake:</strong> <span id="handshake">Waiting for bookmarklet</span></p>
+    <p><strong>Storage:</strong> <span id="storageStatus">Not checked</span></p>
+  </section>
+  <section class="card">
+    <h2>Invented-note persistence</h2>
+    <label for="fakeNote">Type something invented</label>
+    <textarea id="fakeNote" maxlength="500" placeholder="FAKE NOTE: a purple dragon read a book"></textarea>
+    <div class="controls"><button id="saveSynthetic">Save invented note</button><button id="reloadSynthetic" class="secondary">Reload saved note</button></div>
+    <p id="noteStatus" role="status">No note loaded yet.</p>
+  </section>
+  <footer>All script and CSS files are served from this site's own origin. No third-party scripts. No network calls to GitHub or Instagram.</footer>
+</main>
+</body>
+</html>
