@@ -1,31 +1,17 @@
-# Instagram campaign — Public iframe test
+# Instagram-campaign-public — dormant iframe experiment
 
-**Purpose:** This public repository contains only the synthetic-data, no-credential iframe compatibility test used by the Bookstagram bookmarklet. The private project and future private records remain in the separate **private** [Instagram-campaign repository](https://github.com/thatgirlfeels-1/Instagram-campaign).
+**Current decision (7 November 2026): bookmarklet only. No website hosting.**
 
-## How to enable the free GitHub Pages test
+The Bookstagram/Reading Room interface is a **JavaScript bookmarklet** that opens an overlay directly on Instagram. Source code and tests stay on GitHub, but **GitHub Pages is not being used**.
 
-1. Open [this repository's Pages settings](https://github.com/thatgirlfeels-1/Instagram-campaign-public/settings/pages).
-2. Under **Build and deployment** choose **Deploy from a branch**.
-3. Select **main** and **/docs**, then click **Save**.
-4. Once GitHub shows the site as published, open [the iframe test page](https://thatgirlfeels-1.github.io/Instagram-campaign-public/) directly. It should show **Reading Room — Secure-frame compatibility test**.
-5. Enter invented text only; test **Save invented note**, refresh, then **Reload saved note**.
+The folders `docs/`, `bookmarklet/`, and `tests/` contain an earlier **synthetic-only iframe feasibility experiment**. They remain as reference code, **not a deployed application**. Do not enable GitHub Pages or install the iframe bookmarklet from this repository.
 
-## Test inside Instagram (no downloads)
+## Active prototype
 
-1. Open [bookmarklet/bookmarklet.txt](./bookmarklet/bookmarklet.txt) and copy the complete single line beginning with `javascript:`.
-2. Create a **new** browser bookmark named **Reading Room iframe test**. Paste the copied line into the bookmark's **URL** field. Do not replace the existing working bookmarklet.
-3. Open Instagram in the browser and click the new bookmark.
-4. If a framed Reading Room panel loads, look for the message **Frame loaded; cross-origin handshake + storage succeeded**. If it is blocked or shows no reply, report exactly what you see.
-5. Type only **invented test text**, save, close the panel, click the bookmark again, and confirm the invented text reloads.
+Use the working bookmarklet maintained in the private [Instagram-campaign repository](https://github.com/thatgirlfeels-1/Instagram-campaign/tree/poc/milestone-0-stage-b/milestone-0/bookmarklet). Its JavaScript runs as an overlay on Instagram and supports invented test notes only.
 
-### Security and scope
+## Security boundary
 
-- **This is NOT the final app.** The test page is deliberately public and contains no credentials, private data or connection to your GitHub data repository.
-- Instagram might block external iframes; browser storage restrictions may interfere. Neither behaviour has been verified on your computer or phone.
-- **Do not enter GitHub tokens, Instagram passwords, personal book notes, or any genuine account content**.
-- The public `docs/` folder is the Pages publishing source; the `bookmarklet/` folder contains the bookmarklet, and `tests/` contains source checks.
-- GitHub Pages is the invisible component *inside* the Instagram bookmarklet overlay. You do not have to visit the website during normal use if the iframe works.
+A bookmarklet executes in Instagram's page context; its local storage and any GitHub token would not be isolated from Instagram's scripts. **Do not enter real reading notes, GitHub access tokens, or other private information.** Automatic synchronisation of private GitHub records remains an unsolved requirement for this bookmarklet-only design. A hosted iframe cannot satisfy the stated no-hosting constraint, and we will not silently introduce one.
 
-## Rollback
-
-To stop, remove the new test bookmark, then choose **Settings → Pages → Source: None** (if offered) to unpublish. The original Instagram bookmarklet and the private repository are unaffected. Clearing the Pages origin's site storage removes invented local test notes.
+This public repository contains no private Bookstagram records, no credentials, and no deployable production service.
